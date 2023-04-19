@@ -17,9 +17,9 @@ $ npm start
   * /todo 경로로 이동
   * 로그인 토큰 localStorage에 저장
   * 로그인 토큰이 있는 상태로 회원가입 or 로그인 페이지 접근시, /todo 경로로 리다이렉트
-* todo 페이지 기능
+* /todo 페이지 기능
   * todo checkbox를 통한 할 일 완료 여부
   * 수정 버튼 클릭시
     * input 창에서 할일 수정 가능
     * 제출, 취소 버튼
-  * todo 삭제 클릭시 : todo 삭제
+  * 삭제 버튼 클릭시 : todo 삭제
