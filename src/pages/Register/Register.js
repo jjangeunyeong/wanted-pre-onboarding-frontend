@@ -13,16 +13,27 @@ import {
 } from "styles/style.js";
 import { validateEmail, validatePW } from "util/validate";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { post } from "API";
 
 const Register = () => {
   const [email, setEmail] = useState("");
   const [pw, setPW] = useState("");
   const navigate = useNavigate();
 
-  const handleSignup = async (e) => {
-    e.preventDefault();
-    navigate("/signin");
+  useEffect(() => {
+    localStorage.getItem("loginToken") && navigate("/todo");
+  }, []);
+
+  const handleSignup = async () => {
+    const bodyData = { email: String(email), password: String(pw) };
+    const res = await post("/auth/signup", bodyData);
+
+    if (res.status === 201) {
+      navigate("/signin");
+    } else {
+      window.alert("중복되는 이메일입니다.");
+    }
   };
 
   return (

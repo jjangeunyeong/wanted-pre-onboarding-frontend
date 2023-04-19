@@ -9,11 +9,11 @@ const Main = () => {
       <Card>
         <Title />
         <BtnGroup>
-          <Link to="/signin">
-            <Btn>로그인하러 가기</Btn>
-          </Link>
           <Link to="/signup">
             <Btn>아직 회원이 아니신가요?</Btn>
+          </Link>
+          <Link to="/signin">
+            <Btn>로그인하러 가기</Btn>
           </Link>
         </BtnGroup>
       </Card>

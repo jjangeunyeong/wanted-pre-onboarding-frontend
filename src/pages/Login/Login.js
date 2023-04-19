@@ -12,17 +12,31 @@ import {
 } from "styles/style.js";
 import { validateEmail, validatePW } from "util/validate";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { post } from "API";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [pw, setPW] = useState("");
   const navigate = useNavigate();
 
-  const clickedLogin = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    localStorage.getItem("loginToken") && navigate("/todo");
+  }, []);
 
-    navigate("/todo");
+  const clickedLogin = async (e) => {
+    e.preventDefault();
+    const bodyData = { email, password: pw };
+    const res = await post("/auth/signin", bodyData);
+
+    if (res.status === 200) {
+      localStorage.setItem("loginToken", res.data.access_token);
+      navigate("/todo");
+    } else {
+      window.alert(
+        "아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요."
+      );
+    }
   };
 
   return (
