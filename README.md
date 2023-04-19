@@ -1,5 +1,5 @@
 ## 실행 방법
-$ npm install
+$ npm install   
 $ npm start
 
 ## 데모 영상
