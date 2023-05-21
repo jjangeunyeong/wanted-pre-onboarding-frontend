@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import BgImage from "assets/main_bg1.jpg";
 import Logo from "assets/logo_white.png";
+import React from "react";
 
 const Main = () => {
   return (

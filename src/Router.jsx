@@ -4,6 +4,7 @@ import Register from "pages/Register/Register";
 import Login from "pages/Login/Login";
 import Todo from "pages/Todo/Todo";
 import NotFound from "pages/NotFound/NotFound";
+import React from "react";
 
 const Router = () => {
   return (

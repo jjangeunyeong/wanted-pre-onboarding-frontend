@@ -3,8 +3,9 @@ import BgImage from "assets/main_bg1.jpg";
 import ListBG from "assets/bg2.jpg";
 import PinImg from "assets/pushpin.svg";
 import { useState, useEffect } from "react";
-import { authGet, authPost, put, del as deleteAPI, get } from "API";
+import { authGet, authPost, put, del as deleteAPI } from "API";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Todo = () => {
   const [scheduleInput, setScheduleInput] = useState("");
@@ -19,7 +20,7 @@ const Todo = () => {
 
     if (type === "modify") {
       //수정 버튼 클릭시
-      const modifyTodos = getTodos.map((e, i) => {
+      const modifyTodos = getTodos.map((e) => {
         let tmp = { ...e };
         if (String(e.id) === String(id)) {
           tmp = { ...e, isEdited: false };
@@ -30,7 +31,7 @@ const Todo = () => {
     } else if (type === "cancel") {
       //취소 버튼 클릭시
       setModifySchedule("");
-      const modifyTodos = getTodos.map((e, i) => {
+      const modifyTodos = getTodos.map((e) => {
         let tmp = { ...e };
         if (String(e.id) === String(id)) {
           tmp = { ...e, isEdited: true };
@@ -41,14 +42,14 @@ const Todo = () => {
     }
   };
 
-  const handleCheckbox = (props, e) => {
-    const id = props.split("&&")[0];
-    const todo = props.split("&&")[1];
-    const preChecked = props.split("&&")[2];
+  const handleCheckbox = (str) => {
+    const id = str.split("&&")[0];
+    const todo = str.split("&&")[1];
+    const preChecked = str.split("&&")[2];
 
     if (preChecked === "true") {
       updateTodosAPI(id, todo, false);
-      const checkedTodos = getTodos.map((m, i) => {
+      const checkedTodos = getTodos.map((m) => {
         let tmp = { ...m };
         if (String(m.id) === String(id)) {
           tmp = { ...m, isCompleted: false };
@@ -58,7 +59,7 @@ const Todo = () => {
       setTodos(checkedTodos);
     } else {
       updateTodosAPI(id, todo, true);
-      const checkedTodos = getTodos.map((m, i) => {
+      const checkedTodos = getTodos.map((m) => {
         let tmp = { ...m };
         if (String(m.id) === String(id)) {
           tmp = { ...m, isCompleted: true };
@@ -68,9 +69,9 @@ const Todo = () => {
       setTodos(checkedTodos);
     }
   };
-  const successModified = async (props, e) => {
-    const id = props.split("&&&")[0];
-    const curTodo = props.split("&&&")[1];
+  const successModified = async (str) => {
+    const id = str.split("&&&")[0];
+    const curTodo = str.split("&&&")[1];
     let isChecked = true;
     console.log(curTodo);
     if (modifySchedule == "") {
@@ -81,7 +82,7 @@ const Todo = () => {
     }
     console.log(curTodo);
 
-    const modifyTodos = getTodos.map((e, i) => {
+    const modifyTodos = getTodos.map((e) => {
       let tmp = { ...e };
       if (String(e.id) === String(id)) {
         tmp = { ...e, isEdited: true, todo: modifySchedule };
@@ -97,7 +98,7 @@ const Todo = () => {
 
   const getTodosAPI = async () => {
     const res = await authGet("/todos");
-    const addEditTodos = res.data.map((d, i) => {
+    const addEditTodos = res.data.map((d) => {
       const newTodo = { ...d, isEdited: true };
       return newTodo;
     });
@@ -125,8 +126,8 @@ const Todo = () => {
     setScheduleInput("");
   };
 
-  const handleDeleteBtn = async (id, e) => {
-    const res = await deleteAPI(`/todos/${id}`);
+  const handleDeleteBtn = async (id) => {
+    await deleteAPI(`/todos/${id}`);
     const deleteTodos = [...getTodos];
     getTodos.forEach((todo, i) => {
       if (todo.id === id) {
@@ -151,7 +152,7 @@ const Todo = () => {
         </AddButton>
         {getTodos.map((todo, i) => {
           return (
-            <Li>
+            <Li key={`${todo}-${i}`}>
               <CheckBox
                 type="checkbox"
                 id="cbInstead"

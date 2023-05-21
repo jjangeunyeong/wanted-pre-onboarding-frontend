@@ -15,6 +15,7 @@ import { validateEmail, validatePW } from "util/validate";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { post } from "API";
+import React from "react";
 
 const Register = () => {
   const [email, setEmail] = useState("");
