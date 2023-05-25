@@ -10,6 +10,7 @@ import {
   CheckGroup,
   CheckLink,
 } from "styles/style.js";
+import NavBar from "components/NavBar";
 import { validateEmail, validatePW } from "util/validate";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -42,6 +43,7 @@ const Login = () => {
 
   return (
     <Container>
+      <NavBar />
       <Box login>
         <Title>Login</Title>
         <InputGroup>

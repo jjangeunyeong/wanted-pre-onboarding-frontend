@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { authGet, authPost, put, del as deleteAPI } from "API";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import NavBar from "components/NavBar";
 
 const Todo = () => {
   const [scheduleInput, setScheduleInput] = useState("");
@@ -138,85 +139,87 @@ const Todo = () => {
   };
 
   return (
-    <Container>
-      <Board>
-        <Pin />
-        <NewTodo
-          type="text"
-          data-testid="new-todo-input"
-          value={scheduleInput}
-          onChange={(e) => setScheduleInput(e.target.value)}
-        />
-        <AddButton data-testid="new-todo-add-button" onClick={addTodo}>
-          추가
-        </AddButton>
-        {getTodos.map((todo, i) => {
-          return (
-            <Li key={`${todo}-${i}`}>
-              <CheckBox
-                type="checkbox"
-                id="cbInstead"
-                onChange={(e) =>
-                  handleCheckbox(
-                    `${todo.id}&&${todo.todo}&&${todo.isCompleted}`,
-                    e
-                  )
-                }
-                checked={todo.isCompleted}
-              />
-              {todo.isEdited ? (
-                <>
-                  <GetSchedule>{todo.todo}</GetSchedule>
-                  <Btn
-                    data-testid="modify-button"
-                    onClick={(e) => handleEdited(`modify ${todo.id}`, e)}
-                  >
-                    수정
-                  </Btn>
-                  <Btn
-                    delete
-                    data-testid="delete-button"
-                    onClick={(e) => handleDeleteBtn(todo.id, e)}
-                  >
-                    삭제
-                  </Btn>
-                </>
-              ) : (
-                <ModifiedGroup>
-                  <Schedule
-                    type="text"
-                    data-testid="modify-input"
-                    defaultValue={todo.todo}
-                    onChange={(e) => setModifySchedule(e.target.value)}
-                  />
-                  <Btn
-                    success
-                    data-testid="submit-button"
-                    onClick={(e) =>
-                      successModified(`${todo.id}&&&${todo.todo}`, e)
-                    }
-                  >
-                    제출
-                  </Btn>
-                  <Btn
-                    data-testid="cancel-button"
-                    onClick={(e) => handleEdited(`cancel ${todo.id}`, e)}
-                  >
-                    취소
-                  </Btn>
-                </ModifiedGroup>
-              )}
-            </Li>
-          );
-        })}
-      </Board>
-    </Container>
+    <>
+      <NavBar />
+      <Container>
+        <Board>
+          <Pin />
+          <NewTodo
+            type="text"
+            data-testid="new-todo-input"
+            value={scheduleInput}
+            onChange={(e) => setScheduleInput(e.target.value)}
+          />
+          <AddButton data-testid="new-todo-add-button" onClick={addTodo}>
+            추가
+          </AddButton>
+          {getTodos.map((todo, i) => {
+            return (
+              <Li key={`${todo}-${i}`}>
+                <CheckBox
+                  type="checkbox"
+                  id="cbInstead"
+                  onChange={(e) =>
+                    handleCheckbox(
+                      `${todo.id}&&${todo.todo}&&${todo.isCompleted}`,
+                      e
+                    )
+                  }
+                  checked={todo.isCompleted}
+                />
+                {todo.isEdited ? (
+                  <>
+                    <GetSchedule>{todo.todo}</GetSchedule>
+                    <Btn
+                      data-testid="modify-button"
+                      onClick={(e) => handleEdited(`modify ${todo.id}`, e)}
+                    >
+                      수정
+                    </Btn>
+                    <Btn
+                      delete
+                      data-testid="delete-button"
+                      onClick={(e) => handleDeleteBtn(todo.id, e)}
+                    >
+                      삭제
+                    </Btn>
+                  </>
+                ) : (
+                  <ModifiedGroup>
+                    <Schedule
+                      type="text"
+                      data-testid="modify-input"
+                      defaultValue={todo.todo}
+                      onChange={(e) => setModifySchedule(e.target.value)}
+                    />
+                    <Btn
+                      success
+                      data-testid="submit-button"
+                      onClick={(e) =>
+                        successModified(`${todo.id}&&&${todo.todo}`, e)
+                      }
+                    >
+                      제출
+                    </Btn>
+                    <Btn
+                      data-testid="cancel-button"
+                      onClick={(e) => handleEdited(`cancel ${todo.id}`, e)}
+                    >
+                      취소
+                    </Btn>
+                  </ModifiedGroup>
+                )}
+              </Li>
+            );
+          })}
+        </Board>
+      </Container>
+    </>
   );
 };
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
@@ -238,6 +241,7 @@ const Container = styled.div`
 
 const Board = styled.div`
   position: relative;
+  top: 70px;
   background-image: url(${ListBG});
   width: 500px;
   height: 700px;
