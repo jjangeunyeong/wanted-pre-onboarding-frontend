@@ -113,9 +113,9 @@ $ npm start
 
 |                                                                                                                  |                                                                                                                     |
 | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| ![main](https://user-images.githubusercontent.com/123078739/235173145-0f41789d-7e76-48f9-b3d1-ab5c720ccf44.png)  | ![register](https://user-images.githubusercontent.com/123078739/235173218-2e67c2f7-5047-47f8-9645-22a01f1676ea.png) |
+|<img width="1280" alt="image" src="https://github.com/jjangeunyeong/wanted-pre-onboarding-frontend/assets/123078739/db9f176a-7a2b-4443-b850-82c0ead3678d">|<img width="1280" alt="image" src="https://github.com/jjangeunyeong/wanted-pre-onboarding-frontend/assets/123078739/0c533abc-41ee-4c81-90ac-a69170288b06">|
 | 메인 페이지                                                                                                      | 회원가입 페이지                                                                                                     |
-| ![login](https://user-images.githubusercontent.com/123078739/235173283-989dace8-e769-485b-a80a-ea3791257f77.png) | ![todo](https://user-images.githubusercontent.com/123078739/235173337-b81db6da-1013-4195-bb42-7908e1bf4f59.png)     |
+|<img width="1280" alt="image" src="https://github.com/jjangeunyeong/wanted-pre-onboarding-frontend/assets/123078739/ff79eaef-f73b-4698-99ca-c874d892a9d9">|<img width="1268" alt="image" src="https://github.com/jjangeunyeong/wanted-pre-onboarding-frontend/assets/123078739/aaa0853e-c738-446c-9b71-a5c799d78783">|
 | 로그인 페이지                                                                                                    | Todo 페이지                                                                                                         |
 
 ### 📌 트러블 슈팅
