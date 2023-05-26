@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Main from "pages/Main/Main";
-import Register from "pages/Register/Register";
-import Login from "pages/Login/Login";
-import Todo from "pages/Todo/Todo";
-import NotFound from "pages/NotFound/NotFound";
-import React from "react";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Main from 'pages/Main/Main';
+import Register from 'pages/Register/Register';
+import Login from 'pages/Login/Login';
+import Todo from 'pages/Todo/Todo';
+import NotFound from 'pages/NotFound/NotFound';
+import React from 'react';
 
 const Router = () => {
   return (

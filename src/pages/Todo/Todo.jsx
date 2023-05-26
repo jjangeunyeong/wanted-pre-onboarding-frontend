@@ -1,27 +1,27 @@
-import styled from "styled-components";
-import BgImage from "assets/main_bg1.jpg";
-import ListBG from "assets/bg2.jpg";
-import PinImg from "assets/pushpin.svg";
-import { useState, useEffect } from "react";
-import { authGet, authPost, put, del as deleteAPI } from "API";
-import { useNavigate } from "react-router-dom";
-import React from "react";
-import NavBar from "components/NavBar";
+import styled from 'styled-components';
+import BgImage from 'assets/main_bg1.jpg';
+import ListBG from 'assets/bg2.jpg';
+import PinImg from 'assets/pushpin.svg';
+import { useState, useEffect } from 'react';
+import { authGet, authPost, put, del as deleteAPI } from 'API';
+import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import NavBar from 'components/NavBar';
 
 const Todo = () => {
-  const [scheduleInput, setScheduleInput] = useState("");
-  const [modifySchedule, setModifySchedule] = useState("");
+  const [scheduleInput, setScheduleInput] = useState('');
+  const [modifySchedule, setModifySchedule] = useState('');
   const [getTodos, setTodos] = useState([]);
   const navigate = useNavigate();
   const handleEdited = (params, e) => {
     e.preventDefault();
 
-    const type = params.split(" ")[0];
-    const id = params.split(" ")[1];
+    const type = params.split(' ')[0];
+    const id = params.split(' ')[1];
 
-    if (type === "modify") {
+    if (type === 'modify') {
       //수정 버튼 클릭시
-      const modifyTodos = getTodos.map((e) => {
+      const modifyTodos = getTodos.map(e => {
         let tmp = { ...e };
         if (String(e.id) === String(id)) {
           tmp = { ...e, isEdited: false };
@@ -29,10 +29,10 @@ const Todo = () => {
         return tmp;
       });
       setTodos(modifyTodos);
-    } else if (type === "cancel") {
+    } else if (type === 'cancel') {
       //취소 버튼 클릭시
-      setModifySchedule("");
-      const modifyTodos = getTodos.map((e) => {
+      setModifySchedule('');
+      const modifyTodos = getTodos.map(e => {
         let tmp = { ...e };
         if (String(e.id) === String(id)) {
           tmp = { ...e, isEdited: true };
@@ -43,14 +43,14 @@ const Todo = () => {
     }
   };
 
-  const handleCheckbox = (str) => {
-    const id = str.split("&&")[0];
-    const todo = str.split("&&")[1];
-    const preChecked = str.split("&&")[2];
+  const handleCheckbox = str => {
+    const id = str.split('&&')[0];
+    const todo = str.split('&&')[1];
+    const preChecked = str.split('&&')[2];
 
-    if (preChecked === "true") {
+    if (preChecked === 'true') {
       updateTodosAPI(id, todo, false);
-      const checkedTodos = getTodos.map((m) => {
+      const checkedTodos = getTodos.map(m => {
         let tmp = { ...m };
         if (String(m.id) === String(id)) {
           tmp = { ...m, isCompleted: false };
@@ -60,7 +60,7 @@ const Todo = () => {
       setTodos(checkedTodos);
     } else {
       updateTodosAPI(id, todo, true);
-      const checkedTodos = getTodos.map((m) => {
+      const checkedTodos = getTodos.map(m => {
         let tmp = { ...m };
         if (String(m.id) === String(id)) {
           tmp = { ...m, isCompleted: true };
@@ -70,12 +70,12 @@ const Todo = () => {
       setTodos(checkedTodos);
     }
   };
-  const successModified = async (str) => {
-    const id = str.split("&&&")[0];
-    const curTodo = str.split("&&&")[1];
+  const successModified = async str => {
+    const id = str.split('&&&')[0];
+    const curTodo = str.split('&&&')[1];
     let isChecked = true;
     console.log(curTodo);
-    if (modifySchedule == "") {
+    if (modifySchedule === '') {
       //setModifySchedule 변경안됨
       //setModifySchedule(curTodo);
       getTodosAPI();
@@ -83,7 +83,7 @@ const Todo = () => {
     }
     console.log(curTodo);
 
-    const modifyTodos = getTodos.map((e) => {
+    const modifyTodos = getTodos.map(e => {
       let tmp = { ...e };
       if (String(e.id) === String(id)) {
         tmp = { ...e, isEdited: true, todo: modifySchedule };
@@ -94,12 +94,12 @@ const Todo = () => {
 
     updateTodosAPI(id, modifySchedule, isChecked);
     setTodos(modifyTodos);
-    setModifySchedule("");
+    setModifySchedule('');
   };
 
   const getTodosAPI = async () => {
-    const res = await authGet("/todos");
-    const addEditTodos = res.data.map((d) => {
+    const res = await authGet('/todos');
+    const addEditTodos = res.data.map(d => {
       const newTodo = { ...d, isEdited: true };
       return newTodo;
     });
@@ -114,20 +114,21 @@ const Todo = () => {
 
   useEffect(() => {
     getTodosAPI();
-    !localStorage.getItem("loginToken") && navigate("/signin");
+    !localStorage.getItem('loginToken') && navigate('/signin');
   }, []);
 
   const addTodo = async () => {
+    //input이 없을 때 추가 버튼누르면 오류 -> 해결
     const bodyData = { todo: scheduleInput };
-    const res = await authPost("/todos", bodyData);
-    setTodos((todo) => {
+    const res = await authPost('/todos', bodyData);
+    setTodos(todo => {
       const newTodos = [...todo, { ...res.data, isEdited: true }];
       return newTodos;
     });
-    setScheduleInput("");
+    setScheduleInput('');
   };
 
-  const handleDeleteBtn = async (id) => {
+  const handleDeleteBtn = async id => {
     await deleteAPI(`/todos/${id}`);
     const deleteTodos = [...getTodos];
     getTodos.forEach((todo, i) => {
@@ -148,7 +149,7 @@ const Todo = () => {
             type="text"
             data-testid="new-todo-input"
             value={scheduleInput}
-            onChange={(e) => setScheduleInput(e.target.value)}
+            onChange={e => setScheduleInput(e.target.value)}
           />
           <AddButton data-testid="new-todo-add-button" onClick={addTodo}>
             추가
@@ -159,12 +160,7 @@ const Todo = () => {
                 <CheckBox
                   type="checkbox"
                   id="cbInstead"
-                  onChange={(e) =>
-                    handleCheckbox(
-                      `${todo.id}&&${todo.todo}&&${todo.isCompleted}`,
-                      e
-                    )
-                  }
+                  onChange={e => handleCheckbox(`${todo.id}&&${todo.todo}&&${todo.isCompleted}`, e)}
                   checked={todo.isCompleted}
                 />
                 {todo.isEdited ? (
@@ -172,14 +168,14 @@ const Todo = () => {
                     <GetSchedule>{todo.todo}</GetSchedule>
                     <Btn
                       data-testid="modify-button"
-                      onClick={(e) => handleEdited(`modify ${todo.id}`, e)}
+                      onClick={e => handleEdited(`modify ${todo.id}`, e)}
                     >
                       수정
                     </Btn>
                     <Btn
                       delete
                       data-testid="delete-button"
-                      onClick={(e) => handleDeleteBtn(todo.id, e)}
+                      onClick={e => handleDeleteBtn(todo.id, e)}
                     >
                       삭제
                     </Btn>
@@ -190,20 +186,18 @@ const Todo = () => {
                       type="text"
                       data-testid="modify-input"
                       defaultValue={todo.todo}
-                      onChange={(e) => setModifySchedule(e.target.value)}
+                      onChange={e => setModifySchedule(e.target.value)}
                     />
                     <Btn
                       success
                       data-testid="submit-button"
-                      onClick={(e) =>
-                        successModified(`${todo.id}&&&${todo.todo}`, e)
-                      }
+                      onClick={e => successModified(`${todo.id}&&&${todo.todo}`, e)}
                     >
                       제출
                     </Btn>
                     <Btn
                       data-testid="cancel-button"
-                      onClick={(e) => handleEdited(`cancel ${todo.id}`, e)}
+                      onClick={e => handleEdited(`cancel ${todo.id}`, e)}
                     >
                       취소
                     </Btn>
@@ -314,8 +308,7 @@ const Btn = styled.button`
   font-size: 14px;
   font-weight: bold;
   color: white;
-  background-color: ${(props) =>
-    props.delete ? "#a83622" : props.success ? "green" : "gray"};
+  background-color: ${props => (props.delete ? '#a83622' : props.success ? 'green' : 'gray')};
   border-radius: 10px;
   width: 50px;
   height: 34px;

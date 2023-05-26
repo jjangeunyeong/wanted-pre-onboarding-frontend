@@ -1,22 +1,30 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import BgImage from "assets/main_bg1.jpg";
-import Logo from "assets/logo_white.png";
-import React from "react";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import BgImage from 'assets/main_bg1.jpg';
+import Logo from 'assets/logo_white.png';
+import React from 'react';
 
 const Main = () => {
   return (
     <Container>
       <Card>
         <Title />
-        <BtnGroup>
-          <Link to="/signup">
-            <Btn>아직 회원이 아니신가요?</Btn>
+        {localStorage.getItem('loginToken') ? (
+          <Link to="/todo">
+            <BtnGroup>
+              <Btn>나의 할 일 확인하러 가기</Btn>
+            </BtnGroup>
           </Link>
-          <Link to="/signin">
-            <Btn>로그인하러 가기</Btn>
-          </Link>
-        </BtnGroup>
+        ) : (
+          <BtnGroup>
+            <Link to="/signup">
+              <Btn>아직 회원이 아니신가요?</Btn>
+            </Link>
+            <Link to="/signin">
+              <Btn>로그인하러 가기</Btn>
+            </Link>
+          </BtnGroup>
+        )}
       </Card>
     </Container>
   );

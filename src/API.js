@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: "https://www.pre-onboarding-selection-task.shop",
+  baseURL: 'https://www.pre-onboarding-selection-task.shop',
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 
@@ -20,7 +20,7 @@ export const authPost = async (params, bodyData) => {
   try {
     const res = await instance.post(params, bodyData, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("loginToken")}`,
+        Authorization: `Bearer ${localStorage.getItem('loginToken')}`,
       },
     });
     return res;
@@ -29,7 +29,7 @@ export const authPost = async (params, bodyData) => {
   }
 };
 
-export const get = async (params = "") => {
+export const get = async (params = '') => {
   try {
     const response = await instance.get(params);
     return response;
@@ -38,11 +38,11 @@ export const get = async (params = "") => {
   }
 };
 
-export const authGet = async (params = "") => {
+export const authGet = async (params = '') => {
   try {
     const response = await instance.get(params, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("loginToken")}`,
+        Authorization: `Bearer ${localStorage.getItem('loginToken')}`,
       },
     });
     return response;
@@ -51,11 +51,11 @@ export const authGet = async (params = "") => {
   }
 };
 
-export const put = async (params = "", bodyData) => {
+export const put = async (params = '', bodyData) => {
   try {
     const res = await instance.put(params, bodyData, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("loginToken")}`,
+        Authorization: `Bearer ${localStorage.getItem('loginToken')}`,
       },
     });
     return res;
@@ -64,11 +64,11 @@ export const put = async (params = "", bodyData) => {
   }
 };
 
-export const del = async (params = "") => {
+export const del = async (params = '') => {
   try {
     const res = await instance.delete(params, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("loginToken")}`,
+        Authorization: `Bearer ${localStorage.getItem('loginToken')}`,
       },
     });
     return res;

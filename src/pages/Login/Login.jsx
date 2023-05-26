@@ -9,35 +9,33 @@ import {
   CheckMessage,
   CheckGroup,
   CheckLink,
-} from "styles/style.js";
-import NavBar from "components/NavBar";
-import { validateEmail, validatePW } from "util/validate";
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { post } from "API";
-import React from "react";
+} from 'styles/style.js';
+import NavBar from 'components/NavBar';
+import { validateEmail, validatePW } from 'util/validate';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { post } from 'API';
+import React from 'react';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [pw, setPW] = useState("");
+  const [email, setEmail] = useState('');
+  const [pw, setPW] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.getItem("loginToken") && navigate("/todo");
+    localStorage.getItem('loginToken') && navigate('/todo');
   }, []);
 
-  const clickedLogin = async (e) => {
+  const clickedLogin = async e => {
     e.preventDefault();
     const bodyData = { email, password: pw };
-    const res = await post("/auth/signin", bodyData);
+    const res = await post('/auth/signin', bodyData);
 
     if (res.status === 200) {
-      localStorage.setItem("loginToken", res.data.access_token);
-      navigate("/todo");
+      localStorage.setItem('loginToken', res.data.access_token);
+      navigate('/todo');
     } else {
-      window.alert(
-        "아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요."
-      );
+      window.alert('아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.');
     }
   };
 
@@ -54,7 +52,7 @@ const Login = () => {
             id="input-email"
             data-testid="email-input"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
         </InputGroup>
         <InputGroup>
@@ -65,13 +63,13 @@ const Login = () => {
             id="input-pw"
             data-testid="password-input"
             value={pw}
-            onChange={(e) => setPW(e.target.value)}
+            onChange={e => setPW(e.target.value)}
           />
         </InputGroup>
         <Button
           disabled={validateEmail(email) && validatePW(pw) ? false : true}
           data-testid="signin-button"
-          onClick={(e) => clickedLogin(e)}
+          onClick={e => clickedLogin(e)}
         >
           로그인
         </Button>

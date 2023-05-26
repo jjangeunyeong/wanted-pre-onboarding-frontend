@@ -1,18 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import LogoSrc from "assets/logo_white.png";
-import { Link } from "react-router-dom";
-import { useNavigate, useLocation } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import LogoSrc from 'assets/logo_white.png';
+import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const NavBar = () => {
   const navigate = useNavigate();
   const curURL = useLocation();
   const handleSignBtn = () => {
-    if (localStorage.getItem("loginToken")) {
-      localStorage.removeItem("loginToken");
-      navigate("/");
+    if (localStorage.getItem('loginToken')) {
+      localStorage.removeItem('loginToken');
+      navigate('/');
     } else {
-      curURL.pathname === "/signin" ? navigate("/signup") : navigate("/signin");
+      curURL.pathname === '/signin' ? navigate('/signup') : navigate('/signin');
     }
   };
 
@@ -27,11 +27,11 @@ const NavBar = () => {
         </li>
         <li>
           <Btn onClick={handleSignBtn}>
-            {localStorage.getItem("loginToken")
-              ? "로그아웃"
-              : curURL.pathname === "/signin"
-              ? "회원가입"
-              : "로그인"}
+            {localStorage.getItem('loginToken')
+              ? '로그아웃'
+              : curURL.pathname === '/signin'
+              ? '회원가입'
+              : '로그인'}
           </Btn>
         </li>
       </BtnGroup>

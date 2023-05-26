@@ -1,21 +1,22 @@
-import Background from "assets/main_bg1.jpg";
-import styled from "styled-components";
+import Background from 'assets/main_bg1.jpg';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-image: url(${Background});
   width: 100vw;
   height: 100vh;
 `;
 
 export const Box = styled.div`
+  margin-top: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${({ login }) => (login ? "440px" : "450px")};
-  height: ${({ login }) => (login ? "565px" : "600px")};
+  width: ${({ login }) => (login ? '440px' : '450px')};
+  height: ${({ login }) => (login ? '565px' : '600px')};
   background-color: rgba(255, 255, 255, 0.7);
   border-radius: 25px;
 `;
@@ -58,20 +59,20 @@ export const ValidText = styled.p`
   margin-left: 7px;
   margin-top: 7px;
   font-size: 12px;
-  color: ${({ available }) => (available ? "#575654" : "red")};
+  color: ${({ available }) => (available ? '#575654' : 'red')};
 `;
 
 export const Button = styled.button`
   color: white;
   font-size: 15px;
   font-weight: bold;
-  background-color: ${({ disabled }) => (disabled ? "#cfcfcf" : "#61777f")};
+  background-color: ${({ disabled }) => (disabled ? '#cfcfcf' : '#61777f')};
   opacity: 0.9;
   border-radius: 10px;
   width: 320px;
   height: 40px;
   margin-top: 30px;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 
 export const CheckGroup = styled.div`
